@@ -38,7 +38,7 @@ function MatchContainer(){
                         {
                             MemberList.length > 0 &&
                                 MemberList.map( (o,i) => {
-                                    return <MemberBox member={o} key={o.memberid} />
+                                    return <MemberBox member={o} key={o.member_id} />
                                 })
                         }
                         <PlusBox>
