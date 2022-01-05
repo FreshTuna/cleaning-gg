@@ -19,9 +19,9 @@ function MatchContainer(){
         },
         {
             ember_id : 2,
-            nickname: "제이슨",
-            game_nickname: "김치라능",
-            tier:"GOLD"
+            nickname: "재료",
+            game_nickname: "딸기소스치킨",
+            tier:"DIAMOND"
         }
     ]
 
@@ -32,7 +32,7 @@ function MatchContainer(){
                     <MatchBox>
                         <HeaderBox>
                             <HeaderCapacity>
-                                {2} / {10}
+                                {MemberList.length} / {10}
                             </HeaderCapacity>
                         </HeaderBox>
                         {

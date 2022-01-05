@@ -2,7 +2,7 @@ import useMemberContainer from "../hooks/useMemberContainer";
 import styled from "styled-components";
 
 
-function MemberContainer(){
+function MemberContainer({openModal}){
 
     const {
         state,
@@ -17,8 +17,8 @@ function MemberContainer(){
                     </>
                     :
                     <ButtonContainer>
-                        <SignUpButton>회원 가입</SignUpButton>
-                        <SignInButton>로그인</SignInButton>
+                        <SignUpButton onClick={openModal}>회원 가입</SignUpButton>
+                        <SignInButton onClick={openModal}>로그인</SignInButton>
                     </ButtonContainer>
             }
 

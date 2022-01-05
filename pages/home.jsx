@@ -15,7 +15,6 @@ function Home() {
     return(
         <Wrapper>
             <HomeWeb />
-            <HomeMain />
 
             {/*<input*/}
             {/*    type={"text"}*/}

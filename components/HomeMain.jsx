@@ -3,7 +3,6 @@ import MatchContainer from "./MatchContainer";
 
 function HomeMain() {
 
-
     return(
         <Wrapper>
             <MatchContainer/>

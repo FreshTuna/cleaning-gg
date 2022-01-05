@@ -2,7 +2,7 @@ import useNavBar from "../hooks/useNavBar";
 import styled from "styled-components";
 import MemberContainer from "./MemberContainer";
 
-function NavBar() {
+function NavBar({openModal}) {
 
     const {
         state,
@@ -12,7 +12,7 @@ function NavBar() {
     return(
         <Wrapper>
             <Logo src={"https://cleanhome-dev.s3.ap-northeast-2.amazonaws.com/commerce_display/cleaning-gg-logo.svg"} />
-            <MemberContainer />
+            <MemberContainer openModal={openModal} />
 
         </Wrapper>
     )
