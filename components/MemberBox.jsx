@@ -28,7 +28,7 @@ const Wrapper = styled.div`
     margin-top: 10px;
     margin-bottom: 2px;
     border-radius: 7px;
-    box-shadow: rgb(0 0 0 / 8%) 7px 7px 30px;
+    box-shadow: rgb(0 0 0 / 10%) 7px 7px 30px;
     background-color: ${props => props.background ? props.background : "white"};
     cursor: pointer;
     

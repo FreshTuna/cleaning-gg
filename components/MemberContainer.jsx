@@ -2,7 +2,7 @@ import useMemberContainer from "../hooks/useMemberContainer";
 import styled from "styled-components";
 
 
-function MemberContainer({openModal}){
+function MemberContainer({openSignUpModal, openSignInModal}){
 
     const {
         state,
@@ -17,8 +17,8 @@ function MemberContainer({openModal}){
                     </>
                     :
                     <ButtonContainer>
-                        <SignUpButton onClick={openModal}>회원 가입</SignUpButton>
-                        <SignInButton onClick={openModal}>로그인</SignInButton>
+                        <SignUpButton onClick={openSignUpModal}>회원 가입</SignUpButton>
+                        <SignInButton onClick={openSignInModal}>로그인</SignInButton>
                     </ButtonContainer>
             }
 
@@ -37,7 +37,7 @@ const SignUpButton = styled.div`
     justify-content: center;
     width: 108px;
     height: 42px;
-    
+    font-weight: 600;
     &:hover {
         opacity: 0.8;
     }
@@ -54,7 +54,7 @@ const SignInButton = styled.div`
     justify-content: center;
     width: 108px;
     height: 42px;
-    
+    font-weight: 600;
     &:hover {
         opacity: 0.8;
     }

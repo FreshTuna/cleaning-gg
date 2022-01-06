@@ -1,19 +1,28 @@
 import useNavBar from "../hooks/useNavBar";
 import styled from "styled-components";
 import MemberContainer from "./MemberContainer";
+import MemberNav from "./MemberNav";
 
-function NavBar({openModal}) {
+function NavBar({openSignUpModal,openSignInModal}) {
 
     const {
         state,
         handleChange,
-    } = useNavBar
+    } = useNavBar();
 
     return(
         <Wrapper>
             <Logo src={"https://cleanhome-dev.s3.ap-northeast-2.amazonaws.com/commerce_display/cleaning-gg-logo.svg"} />
-            <MemberContainer openModal={openModal} />
-
+                {
+                    state.user_data == null ?
+                            <>
+                                <MemberContainer openSignUpModal={openSignUpModal} openSignInModal={openSignInModal} />
+                            </>
+                        :
+                            <>
+                                <MemberNav gameNickname={state.game_nickname} />
+                            </>
+                }
         </Wrapper>
     )
 

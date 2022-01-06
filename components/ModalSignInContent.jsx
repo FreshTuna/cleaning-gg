@@ -1,12 +1,18 @@
 import styled from "styled-components";
-import useModalContent from "../hooks/useModalContent";
+import {LINE_OPTION, TIER_BACKGROUND_COLOR, TIER_OPTION} from "../common/contants";
+import useModalSignInContent from "../hooks/useModalSignInContent";
 
-function ModalContent({onClose}) {
+function ModalSignInContent({onClose}) {
 
     const {
         state,
         handleChange,
-    } = useModalContent();
+        enroll,
+    } = useModalSignInContent({
+        params:{
+            onClose: onClose,
+        }
+    });
 
     return(
         <Wrapper>
@@ -18,21 +24,11 @@ function ModalContent({onClose}) {
                 <SignUpArea>
                     <InputBox>
                         <InputLabel>게임 닉</InputLabel>
-                        <Input type={"text"} placeholder={"닉네임"} name={"game_nickname"} value={state.game_nickname} onChange={handleChange}/>
-                    </InputBox>
-
-                    <InputBox>
-                        <InputLabel>이름</InputLabel>
-                        <Input type={"text"} placeholder={"이름"} name={"nickname"} value={state.nickname} onChange={handleChange}/>
-                    </InputBox>
-
-                    <InputBox>
-                        <InputLabel>티어</InputLabel>
-                        <Input type={"text"} placeholder={"티어"} name={"tier"} value={state.tier} onChange={handleChange}/>
+                        <Input type={"text"} placeholder={"ex) 참치"} name={"game_nickname"} value={state.game_nickname} onChange={handleChange}/>
                     </InputBox>
 
                     <ButtonContainer>
-                        <SignUpButton onClick={onClose}>가입하기</SignUpButton>
+                        <SignUpButton onClick={enroll}>로그인</SignUpButton>
                     </ButtonContainer>
 
                 </SignUpArea>
@@ -71,17 +67,21 @@ const SignUpArea = styled.div`
 
 const InputLabel = styled.div`
     font-weight: 500;
-    font-size:15px;
+    font-size:18px;
     color: rgb(138,131,131);
 `;
 
 const InputBox = styled.div`
-    padding-bottom: 10px;
+    padding-bottom: 13px;
+    display:flex;
+    flex-direction: column;
+    gap:3px;
 `;
 
 const Input = styled.input`
-    width: 12rem;
-    size: 1rem;
+    width: 13rem;
+    size: 1.3rem;
+    font-size: 15px; 
     border-top: none;
     border-right: none;
     border-left: none;
@@ -117,4 +117,4 @@ const ButtonContainer = styled.div`
 `;
 
 
-export default ModalContent;
+export default ModalSignInContent;
