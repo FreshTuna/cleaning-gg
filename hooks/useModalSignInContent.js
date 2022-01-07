@@ -25,7 +25,7 @@ export default function useModalSignInContent({params}){
 
     const enroll = useCallback( async () => {
 
-        const res = await apiClient.post(`http://192.168.35.52:8000/members/signin`,
+        const res = await apiClient.post(`http://52.87.226.126:8000/members/signin`,
             {
                 game_nickname: state.game_nickname,
             }
