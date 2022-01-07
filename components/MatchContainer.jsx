@@ -8,22 +8,8 @@ function MatchContainer(){
         state,
         handleChange,
         startMatching,
+        addMember
     } = useMatchContainer();
-
-    const MemberList = [
-        {
-            member_id : 1,
-            nickname: "헨리",
-            game_nickname: "참치라능",
-            tier: "PLATINUM",
-        },
-        {
-            ember_id : 2,
-            nickname: "재료",
-            game_nickname: "딸기소스치킨",
-            tier:"DIAMOND"
-        }
-    ]
 
     return (
         <>
@@ -32,17 +18,17 @@ function MatchContainer(){
                     <MatchBox>
                         <HeaderBox>
                             <HeaderCapacity>
-                                {MemberList.length} / {10}
+                                {state.memberList.length} / {10}
                             </HeaderCapacity>
                         </HeaderBox>
                         {
-                            MemberList.length > 0 &&
-                                MemberList.map( (o,i) => {
+                            state.memberList.length > 0 &&
+                                state.memberList.map( (o,i) => {
                                     return <MemberBox member={o} key={o.member_id} />
                                 })
                         }
                         <PlusBox>
-                            <PlusImage src={"https://cleanhome-dev.s3.ap-northeast-2.amazonaws.com/commerce_display/ic_PlusSmall_B85_S16_V0.1.svg"} />
+                            <PlusImage src={"https://cleanhome-dev.s3.ap-northeast-2.amazonaws.com/commerce_display/ic_PlusSmall_B85_S16_V0.1.svg"} onClick={() => addMember(localStorage.getItem('game_nickname'))} />
                         </PlusBox>
                     </MatchBox>
                     :

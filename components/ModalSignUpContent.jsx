@@ -1,14 +1,18 @@
 import styled from "styled-components";
 import useModalSignUpContent from "../hooks/useModalSignUpContent";
-import {LINE_OPTION, TIER_BACKGROUND_COLOR, TIER_OPTION} from "../common/contants";
+import {LINE_OPTION, TIER_OPTION} from "../common/contants";
 
-function ModalSignUpContent() {
+function ModalSignUpContent({onClose}) {
 
     const {
         state,
         handleChange,
         enroll,
-    } = useModalSignUpContent();
+    } = useModalSignUpContent({
+        params:{
+            onClose:onClose,
+        }
+    });
 
     return(
         <Wrapper>
@@ -49,6 +53,10 @@ function ModalSignUpContent() {
                             }
                         </Select>
                     </InputBox>
+
+                    <Validation>
+                        {state.validation}
+                    </Validation>
 
                     <ButtonContainer>
                         <SignUpButton onClick={enroll}>가입하기</SignUpButton>
@@ -150,6 +158,11 @@ const ButtonContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+`;
+
+const Validation = styled.div`
+    font-size: 16px;
+    color: red;
 `;
 
 

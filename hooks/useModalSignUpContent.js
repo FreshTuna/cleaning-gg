@@ -1,13 +1,14 @@
 import {useEffect, useState, useCallback} from "react";
 import {apiClient} from "../common/util";
 
-export default function useModalSignUpContent(){
+export default function useModalSignUpContent({params}){
 
     const [state, setState] = useState({
         nickname: "",
         game_nickname: "",
         tier:"",
         line:"",
+        validation:"",
     })
 
     useEffect( () => {
@@ -24,7 +25,7 @@ export default function useModalSignUpContent(){
 
     const enroll = useCallback( async () => {
 
-        const res = await apiClient.post(`http://52.87.226.126:8000/members/signup`,
+        const res = await apiClient.post(`http://192.168.35.52:8000/members/signup`,
             {
                 nickname: state.nickname,
                 game_nickname: state.game_nickname,
@@ -33,6 +34,17 @@ export default function useModalSignUpContent(){
             }
         );
         console.log(res);
+
+        if(res.data.MESSAGE == "GAME_NICKNAME_DUPLICATED"){
+            setState(state => ({
+                ...state,
+                validation:"이미 등록된 닉네임 입니다!",
+            }));
+        }
+        else{
+            params.onClose()
+        }
+
     }, [state]);
 
     return {
