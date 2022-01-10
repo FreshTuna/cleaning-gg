@@ -1,4 +1,5 @@
 import {useEffect, useState, useCallback} from "react";
+import {apiClient} from "../common/util";
 
 export default function useMatchContainer(){
 
@@ -25,6 +26,10 @@ export default function useMatchContainer(){
         ]
     })
 
+    const onLoad = useCallback( async () => {
+        const res = await apiClient.get(`http://192.168.35.142:8000/matches`);
+    })
+
     const handleChange = useCallback((e) => {
         const {name, value} = e.target;
         setState(state => ({
@@ -33,7 +38,15 @@ export default function useMatchContainer(){
         }));
     }, []);
 
-    const startMatching = useCallback( () => {
+    const startMatching = useCallback( async (token) => {
+
+        const res = await apiClient.post(`http://192.168.35.142:8000/matches/create`,
+            {
+                owner_nickname: token,
+            }
+        );
+
+        console.log(res);
 
         setState(state => ({
             ...state,

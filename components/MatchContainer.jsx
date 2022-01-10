@@ -8,7 +8,7 @@ function MatchContainer(){
         state,
         handleChange,
         startMatching,
-        addMember
+        addMember,
     } = useMatchContainer();
 
     return (
@@ -32,7 +32,7 @@ function MatchContainer(){
                         </PlusBox>
                     </MatchBox>
                     :
-                    <PublishButton onClick={startMatching}>매치 생성</PublishButton>
+                    <PublishButton onClick={() => startMatching(localStorage.getItem('game_nickname'))}>매치 생성</PublishButton>
 
             }
         </>
