@@ -10,6 +10,7 @@ export default function useMatchContainer(){
     const [state, setState] = useState({
         isMatching: false,
         styleOpacity: 1,
+        matchId:0,
         memberList: [
             {
                 member_id : 1,
@@ -38,6 +39,7 @@ export default function useMatchContainer(){
 
             setState( (state) => ({
                 ...state,
+                matchId: res.data.match.match_id,
                 isMatching: true,
             }));
         }
@@ -55,7 +57,7 @@ export default function useMatchContainer(){
 
         const res = await apiClient.post(`http://192.168.35.224:8000/matches/create`,
             {
-                owner_nickname: token,
+                owner_nickname: token
             }
         );
 
@@ -67,16 +69,30 @@ export default function useMatchContainer(){
         }));
     }, []);
 
-    const addMember = useCallback( (token) => {
+    const addMember = useCallback( async (token) => {
 
-        const member = {
-            member_id : 3,
-            nickname: token,
-            game_nickname: token,
-            tier:"GOLD"
+        console.log(state);
+        const res = await apiClient.post(`http://192.168.35.224:8000/entries/create`,
+            {
+                game_nickname: token,
+                match_id: state.matchId,
+            }
+        );
+
+        console.log(res);
+
+        if(res.data.MESSAGE == 'ENTRY_EXISTING'){
+            alert("이미 엔트리에 참여되어있습니다!");
+
+            return;
         }
 
-        console.log("here");
+        const member = {
+            member_id : res.data.member.member_id,
+            nickname: res.data.member.nickname,
+            game_nickname: res.data.member.game_nickname,
+            tier: res.data.member.tier,
+        }
 
         setState(state => ({
             ...state,
