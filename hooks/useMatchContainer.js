@@ -27,7 +27,20 @@ export default function useMatchContainer(){
     })
 
     const onLoad = useCallback( async () => {
-        const res = await apiClient.get(`http://192.168.35.142:8000/matches`);
+        const res = await apiClient.get(`http://192.168.35.224:8000/matches/list`);
+
+        console.log(res);
+
+        if(res.data.MESSAGE == "MATCH_JOINED"){
+
+            const match_members = await apiClient.get(`http://192.168.35.224:8000/entries/members?match_id=${res.data.match.match_id}`);
+            console.log(match_members);
+
+            setState( (state) => ({
+                ...state,
+                isMatching: true,
+            }));
+        }
     })
 
     const handleChange = useCallback((e) => {
@@ -40,7 +53,7 @@ export default function useMatchContainer(){
 
     const startMatching = useCallback( async (token) => {
 
-        const res = await apiClient.post(`http://192.168.35.142:8000/matches/create`,
+        const res = await apiClient.post(`http://192.168.35.224:8000/matches/create`,
             {
                 owner_nickname: token,
             }
@@ -78,5 +91,6 @@ export default function useMatchContainer(){
         handleChange,
         startMatching,
         addMember,
+        onLoad,
     };
 }

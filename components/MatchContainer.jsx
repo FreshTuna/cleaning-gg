@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import useMatchContainer from "../hooks/useMatchContainer";
 import MemberBox from "./MemberBox";
+import {useEffect} from "react";
 
 function MatchContainer(){
 
@@ -9,7 +10,12 @@ function MatchContainer(){
         handleChange,
         startMatching,
         addMember,
+        onLoad,
     } = useMatchContainer();
+
+    useEffect(() => {
+        onLoad();
+    }, [])
 
     return (
         <>
