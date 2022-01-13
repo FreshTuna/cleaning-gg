@@ -37,10 +37,13 @@ export default function useMatchContainer(){
             const match_members = await apiClient.get(`http://192.168.35.224:8000/entries/members?match_id=${res.data.match.match_id}`);
             console.log(match_members);
 
+            console.log(res.data);
+
             setState( (state) => ({
                 ...state,
                 matchId: res.data.match.match_id,
                 isMatching: true,
+                memberList: res.data.entry_list,
             }));
         }
     })
