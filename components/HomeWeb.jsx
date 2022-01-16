@@ -5,6 +5,8 @@ import Modal from "./Modal";
 import ModalSignUpContent from "./ModalSignUpContent";
 import ModalSignInContent from "./ModalSignInContent";
 import ModalMemberInfoContent from "./ModalMemberInfoContent";
+import LoadingOverlay from "./LoadingOverlay";
+import useLoading from "../hooks/useLoading";
 
 function HomeWeb() {
 
@@ -14,6 +16,8 @@ function HomeWeb() {
     const [memberInfo, setMemberInfo] = useState(false);
     const [entry, setEntry] = useState({});
     const [newMemberList, setNewMemberList] = useState([]);
+
+    const {visible} = useLoading();
 
     const openSignUpModal = () => {
         setModalVisible(true)
@@ -65,6 +69,9 @@ function HomeWeb() {
                     }
                 </Modal>
             }
+            <LoadingOverlay
+                visible={visible}
+            />
         </>
     )
 }

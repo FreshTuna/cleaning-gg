@@ -7,7 +7,6 @@ function MatchContainer({openMemberInfoModal, newMemberList}){
 
     const {
         state,
-        handleChange,
         startMatching,
         startRandomize,
         refreshMemberList,
@@ -60,6 +59,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     gap: 24px;
     align-items: center;
+    z-index: 10;
 `;
 
 

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import {LINE_OPTION, TIER_BACKGROUND_COLOR, TIER_OPTION} from "../common/contants";
 import useModalSignInContent from "../hooks/useModalSignInContent";
 
 function ModalSignInContent({onClose}) {

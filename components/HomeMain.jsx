@@ -15,6 +15,7 @@ const Wrapper = styled.div`
     height: 100vh;
     display:flex;
     align-items: center;
+    z-index: 10;
     justify-content: center;
     background-color:rgb(255, 254, 252);
 `;

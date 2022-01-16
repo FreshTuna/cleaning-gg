@@ -1,8 +1,10 @@
 import {useEffect, useState, useCallback} from "react";
 import {apiClient} from "../common/util";
 import {LOCAL_IP_ADDRESS} from "../common/contants";
+import useLoading from "./useLoading";
 
 export default function useMatchContainer(){
+    const {showLoadingIcon, closeLoadingIcon} = useLoading();
 
     useEffect( () => {
 
@@ -17,24 +19,21 @@ export default function useMatchContainer(){
     })
 
     const onLoad = useCallback( async () => {
+        showLoadingIcon();
         const res = await apiClient.get(`${LOCAL_IP_ADDRESS}/matches/list`);
 
         console.log(res);
 
         if(res.data.MESSAGE == "MATCH_JOINED"){
-
-            const match_members = await apiClient.get(`${LOCAL_IP_ADDRESS}/entries/members?match_id=${res.data.match.match_id}`);
-            console.log(match_members);
-
-            console.log(res.data);
-
             setState( (state) => ({
                 ...state,
                 matchId: res.data.match.match_id,
                 isMatching: true,
                 memberList: res.data.entry_list,
             }));
+            closeLoadingIcon();
         }
+        closeLoadingIcon();
     })
 
     const handleChange = useCallback((e) => {
@@ -55,7 +54,7 @@ export default function useMatchContainer(){
 
 
     const startMatching = useCallback( async (token) => {
-
+        showLoadingIcon();
         const res = await apiClient.post(`${LOCAL_IP_ADDRESS}/matches/create`,
             {
                 owner_nickname: token
@@ -66,9 +65,11 @@ export default function useMatchContainer(){
             ...state,
             isMatching: true,
         }));
+        closeLoadingIcon()
     }, []);
 
     const addMember = useCallback( async (token) => {
+        showLoadingIcon();
         const res = await apiClient.post(`${LOCAL_IP_ADDRESS}/entries/create`,
             {
                 game_nickname: token,
@@ -78,11 +79,11 @@ export default function useMatchContainer(){
 
         if(res.data.MESSAGE == 'ENTRY_EXISTING'){
             alert("이미 엔트리에 참여되어있습니다!");
-
+            closeLoadingIcon();
             return;
         } else if(res.data.MESSAGE == 'ENTRY_FULL'){
             alert("엔트리가 꽉 찼습니다!");
-
+            closeLoadingIcon();
             return;
         }
 
@@ -98,16 +99,18 @@ export default function useMatchContainer(){
             ...state,
             memberList: [...state.memberList, member ]
         }));
+        closeLoadingIcon();
     });
 
     const startRandomize = useCallback( async () => {
-
+        showLoadingIcon();
         const res = await apiClient.post(`${LOCAL_IP_ADDRESS}/matches/randomize`,
             {
                 match_id:state.matchId,
             })
 
         console.log(res);
+        closeLoadingIcon()
     })
 
     return {

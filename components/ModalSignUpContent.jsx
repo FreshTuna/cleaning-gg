@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import useModalSignUpContent from "../hooks/useModalSignUpContent";
 import {LINE_OPTION, TIER_OPTION} from "../common/contants";
+import useLoading from "../hooks/useLoading";
 
 function ModalSignUpContent({onClose}) {
 
@@ -13,6 +14,8 @@ function ModalSignUpContent({onClose}) {
             onClose:onClose,
         }
     });
+
+    const {visible} = useLoading();
 
     return(
         <Wrapper>

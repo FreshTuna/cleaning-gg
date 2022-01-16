@@ -1,5 +1,5 @@
 
-export const LOCAL_IP_ADDRESS = "http://172.30.1.15:8000"
+export const LOCAL_IP_ADDRESS = "http://192.168.35.175:8000"
 
 export const TIER_BACKGROUND_COLOR = {
     'BRONZE' : {key :'BRONZE', value: '#6a3805'},

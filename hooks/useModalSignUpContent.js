@@ -1,6 +1,7 @@
 import {useEffect, useState, useCallback} from "react";
 import {apiClient} from "../common/util";
 import {LOCAL_IP_ADDRESS} from "../common/contants";
+import useLoading from "./useLoading";
 
 export default function useModalSignUpContent({params}){
 
@@ -16,6 +17,8 @@ export default function useModalSignUpContent({params}){
 
     }, []);
 
+    const {showLoadingIcon, closeLoadingIcon} = useLoading();
+
     const handleChange = useCallback((e) => {
         const {name, value} = e.target;
         setState(state => ({
@@ -25,7 +28,7 @@ export default function useModalSignUpContent({params}){
     }, []);
 
     const enroll = useCallback( async () => {
-
+        showLoadingIcon();
         const res = await apiClient.post(`${LOCAL_IP_ADDRESS}/members/signup`,
             {
                 nickname: state.nickname,
@@ -41,8 +44,10 @@ export default function useModalSignUpContent({params}){
                 ...state,
                 validation:"이미 등록된 닉네임 입니다!",
             }));
+            closeLoadingIcon();
         }
         else{
+            closeLoadingIcon();
             params.onClose()
         }
 
