@@ -1,6 +1,6 @@
 import {useCallback, useState} from "react";
 import {apiClient} from "../common/util";
-import {LOCAL_IP_ADDRESS} from "../common/contants";
+import {LOCAL_IP_ADDRESS} from "../common/constants";
 
 export default function useModalMemberInfoContent({params}){
 

@@ -1,6 +1,6 @@
 import {useEffect, useState, useCallback} from "react";
 import {apiClient} from "../common/util";
-import {LOCAL_IP_ADDRESS} from "../common/contants";
+import {LOCAL_IP_ADDRESS} from "../common/constants";
 import useLoading from "./useLoading";
 
 export default function useModalSignUpContent({params}){

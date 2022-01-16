@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import useModalSignUpContent from "../hooks/useModalSignUpContent";
-import {LINE_OPTION, TIER_OPTION} from "../common/contants";
+import {LINE_OPTION, TIER_OPTION} from "../common/constants";
 import useLoading from "../hooks/useLoading";
 
 function ModalSignUpContent({onClose}) {
