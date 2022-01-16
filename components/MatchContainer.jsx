@@ -3,7 +3,7 @@ import useMatchContainer from "../hooks/useMatchContainer";
 import MemberBox from "./MemberBox";
 import {useEffect} from "react";
 
-function MatchContainer(){
+function MatchContainer({openMemberInfoModal}){
 
     const {
         state,
@@ -21,22 +21,25 @@ function MatchContainer(){
         <>
             {
                 state.isMatching?
-                    <MatchBox>
-                        <HeaderBox>
-                            <HeaderCapacity>
-                                {state.memberList.length} / {10}
-                            </HeaderCapacity>
-                        </HeaderBox>
-                        {
-                            state.memberList.length > 0 &&
-                                state.memberList.map( (o,i) => {
-                                    return <MemberBox member={o} key={o.member_id} />
-                                })
-                        }
-                        <PlusBox>
-                            <PlusImage src={"https://cleanhome-dev.s3.ap-northeast-2.amazonaws.com/commerce_display/ic_PlusSmall_B85_S16_V0.1.svg"} onClick={() => addMember(localStorage.getItem('game_nickname'))} />
-                        </PlusBox>
-                    </MatchBox>
+                    <Wrapper>
+                        <MatchBox>
+                            <HeaderBox>
+                                <HeaderCapacity>
+                                    {state.memberList.length} / {10}
+                                </HeaderCapacity>
+                            </HeaderBox>
+                            {
+                                state.memberList.length > 0 &&
+                                    state.memberList.map( (o,i) => {
+                                        return <MemberBox member={o} key={o.member_id} onClick={openMemberInfoModal} />
+                                    })
+                            }
+                            <PlusBox onClick={() => addMember(localStorage.getItem('game_nickname'))}>
+                                <PlusImage src={"https://cleanhome-dev.s3.ap-northeast-2.amazonaws.com/commerce_display/ic_PlusSmall_B85_S16_V0.1.svg"} />
+                            </PlusBox>
+                        </MatchBox>
+                        <PublishButton>매칭 시작</PublishButton>
+                    </Wrapper>
                     :
                     <PublishButton onClick={() => startMatching(localStorage.getItem('game_nickname'))}>매치 생성</PublishButton>
 
@@ -45,6 +48,13 @@ function MatchContainer(){
     )
 
 }
+
+const Wrapper = styled.div`
+    display:flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
+`;
 
 
 const PublishButton = styled.div`

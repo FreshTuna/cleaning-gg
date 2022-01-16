@@ -1,5 +1,6 @@
 import {useEffect, useState, useCallback} from "react";
 import {apiClient} from "../common/util";
+import {LOCAL_IP_ADDRESS} from "../common/contants";
 
 export default function useMatchContainer(){
 
@@ -28,13 +29,13 @@ export default function useMatchContainer(){
     })
 
     const onLoad = useCallback( async () => {
-        const res = await apiClient.get(`http://192.168.35.224:8000/matches/list`);
+        const res = await apiClient.get(`${LOCAL_IP_ADDRESS}/matches/list`);
 
         console.log(res);
 
         if(res.data.MESSAGE == "MATCH_JOINED"){
 
-            const match_members = await apiClient.get(`http://192.168.35.224:8000/entries/members?match_id=${res.data.match.match_id}`);
+            const match_members = await apiClient.get(`${LOCAL_IP_ADDRESS}/entries/members?match_id=${res.data.match.match_id}`);
             console.log(match_members);
 
             console.log(res.data);
@@ -58,7 +59,7 @@ export default function useMatchContainer(){
 
     const startMatching = useCallback( async (token) => {
 
-        const res = await apiClient.post(`http://192.168.35.224:8000/matches/create`,
+        const res = await apiClient.post(`${LOCAL_IP_ADDRESS}/matches/create`,
             {
                 owner_nickname: token
             }
@@ -75,7 +76,7 @@ export default function useMatchContainer(){
     const addMember = useCallback( async (token) => {
 
         console.log(state);
-        const res = await apiClient.post(`http://192.168.35.224:8000/entries/create`,
+        const res = await apiClient.post(`${LOCAL_IP_ADDRESS}/entries/create`,
             {
                 game_nickname: token,
                 match_id: state.matchId,

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import useMemberBox from "../hooks/useMemberBox";
 
-function MemberBox({member}){
+function MemberBox({member,onClick}){
 
     const {
         state,
@@ -14,7 +14,7 @@ function MemberBox({member}){
 
 
     return(
-        <Wrapper background={state.backgroundColor}>
+        <Wrapper background={state.backgroundColor} onClick={() => onClick(member)}>
             <Nickname>
                 {member.nickname}
             </Nickname>
