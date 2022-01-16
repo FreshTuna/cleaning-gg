@@ -12,20 +12,8 @@ export default function useMatchContainer(){
         isMatching: false,
         styleOpacity: 1,
         matchId:0,
-        memberList: [
-            {
-                member_id : 1,
-                nickname: "헨리",
-                game_nickname: "참치라능",
-                tier: "PLATINUM",
-            },
-            {
-                member_id : 2,
-                nickname: "재료",
-                game_nickname: "딸기소스치킨",
-                tier:"DIAMOND"
-            }
-        ]
+        memberList: [],
+
     })
 
     const onLoad = useCallback( async () => {
@@ -57,6 +45,15 @@ export default function useMatchContainer(){
         }));
     }, []);
 
+    const refreshMemberList = useCallback( (member_list) => {
+        setState( state => ({
+            ...state,
+            memberList:member_list,
+        }));
+
+    }, []);
+
+
     const startMatching = useCallback( async (token) => {
 
         const res = await apiClient.post(`${LOCAL_IP_ADDRESS}/matches/create`,
@@ -65,8 +62,6 @@ export default function useMatchContainer(){
             }
         );
 
-        console.log(res);
-
         setState(state => ({
             ...state,
             isMatching: true,
@@ -74,8 +69,6 @@ export default function useMatchContainer(){
     }, []);
 
     const addMember = useCallback( async (token) => {
-
-        console.log(state);
         const res = await apiClient.post(`${LOCAL_IP_ADDRESS}/entries/create`,
             {
                 game_nickname: token,
@@ -83,10 +76,12 @@ export default function useMatchContainer(){
             }
         );
 
-        console.log(res);
-
         if(res.data.MESSAGE == 'ENTRY_EXISTING'){
             alert("이미 엔트리에 참여되어있습니다!");
+
+            return;
+        } else if(res.data.MESSAGE == 'ENTRY_FULL'){
+            alert("엔트리가 꽉 찼습니다!");
 
             return;
         }
@@ -94,6 +89,7 @@ export default function useMatchContainer(){
         const member = {
             member_id : res.data.member.member_id,
             nickname: res.data.member.nickname,
+            entry_id: res.data.member.entry_id,
             game_nickname: res.data.member.game_nickname,
             tier: res.data.member.tier,
         }
@@ -102,14 +98,24 @@ export default function useMatchContainer(){
             ...state,
             memberList: [...state.memberList, member ]
         }));
+    });
 
-        console.log(state);
+    const startRandomize = useCallback( async () => {
+
+        const res = await apiClient.post(`${LOCAL_IP_ADDRESS}/matches/randomize`,
+            {
+                match_id:state.matchId,
+            })
+
+        console.log(res);
     })
 
     return {
         state,
         handleChange,
+        refreshMemberList,
         startMatching,
+        startRandomize,
         addMember,
         onLoad,
     };

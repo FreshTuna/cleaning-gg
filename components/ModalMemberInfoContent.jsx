@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import useModalMemberInfoContent from "../hooks/useModalMemberInfoContent";
 
-function ModalMemberInfoContent({entry, closeModal}){
+function ModalMemberInfoContent({entry, onClose,setNewMemberList}){
 
     const {
         state,
@@ -10,7 +10,8 @@ function ModalMemberInfoContent({entry, closeModal}){
     } = useModalMemberInfoContent({
         params:{
             entry:entry,
-            closeModal:closeModal,
+            onClose:onClose,
+            setNewMemberList:setNewMemberList,
         }
     });
 

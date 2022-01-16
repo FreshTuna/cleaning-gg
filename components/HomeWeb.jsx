@@ -13,6 +13,7 @@ function HomeWeb() {
     const [signIn, setSignIn] = useState(false);
     const [memberInfo, setMemberInfo] = useState(false);
     const [entry, setEntry] = useState({});
+    const [newMemberList, setNewMemberList] = useState([]);
 
     const openSignUpModal = () => {
         setModalVisible(true)
@@ -37,11 +38,10 @@ function HomeWeb() {
         setMemberInfo(true);
     }
 
-
     return(
         <>
             <NavBar openSignUpModal={openSignUpModal} openSignInModal={openSignInModal}  />
-            <HomeMain openMemberInfoModal={openMemberInfoModal}/>
+            <HomeMain openMemberInfoModal={openMemberInfoModal} newMemberList={newMemberList}/>
             {
                 modalVisible &&
                 <Modal
@@ -61,7 +61,7 @@ function HomeWeb() {
                     }
                     {
                         memberInfo &&
-                            <ModalMemberInfoContent entry={entry} onClose={closeModal} />
+                            <ModalMemberInfoContent entry={entry} onClose={closeModal} setNewMemberList={setNewMemberList} />
                     }
                 </Modal>
             }

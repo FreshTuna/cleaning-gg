@@ -15,24 +15,26 @@ export default function useModalMemberInfoContent({params}){
 
     const deleteEntry = useCallback( async () => {
 
-        console.log(state);
         const res = await apiClient.post(`${LOCAL_IP_ADDRESS}/entries/delete`,
             {
                 entry_id: state.entryId,
             });
+
+        params.setNewMemberList(res.data.entry_list);
+        params.onClose();
     })
 
 
     const handleLeader = useCallback( async (value) => {
 
-        console.log(state);
         const res = await apiClient.put(`${LOCAL_IP_ADDRESS}/entries/leader`,
             {
                 entry_id: state.entryId,
                 leader_yn: value,
             });
 
-        console.log(res);
+        params.setNewMemberList(res.data.entry_list);
+        params.onClose();
     })
 
     return {

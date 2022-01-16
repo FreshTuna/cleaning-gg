@@ -3,12 +3,14 @@ import useMatchContainer from "../hooks/useMatchContainer";
 import MemberBox from "./MemberBox";
 import {useEffect} from "react";
 
-function MatchContainer({openMemberInfoModal}){
+function MatchContainer({openMemberInfoModal, newMemberList}){
 
     const {
         state,
         handleChange,
         startMatching,
+        startRandomize,
+        refreshMemberList,
         addMember,
         onLoad,
     } = useMatchContainer();
@@ -16,6 +18,10 @@ function MatchContainer({openMemberInfoModal}){
     useEffect(() => {
         onLoad();
     }, [])
+
+    useEffect( ()=> {
+        refreshMemberList(newMemberList);
+    }, [newMemberList])
 
     return (
         <>
@@ -38,7 +44,7 @@ function MatchContainer({openMemberInfoModal}){
                                 <PlusImage src={"https://cleanhome-dev.s3.ap-northeast-2.amazonaws.com/commerce_display/ic_PlusSmall_B85_S16_V0.1.svg"} />
                             </PlusBox>
                         </MatchBox>
-                        <PublishButton>매칭 시작</PublishButton>
+                        <PublishButton onClick={startRandomize}>매칭 시작</PublishButton>
                     </Wrapper>
                     :
                     <PublishButton onClick={() => startMatching(localStorage.getItem('game_nickname'))}>매치 생성</PublishButton>

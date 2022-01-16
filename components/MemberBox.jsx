@@ -17,6 +17,10 @@ function MemberBox({member,onClick}){
         <Wrapper background={state.backgroundColor} onClick={() => onClick(member)}>
             <Nickname>
                 {member.nickname}
+                {
+                    member.leader_yn &&
+                    <CrownImage src={"https://cleanhome-dev.s3.ap-northeast-2.amazonaws.com/mbti/crown_icon.svg"} />
+                }
             </Nickname>
         </Wrapper>
     )
@@ -24,6 +28,7 @@ function MemberBox({member,onClick}){
 
 const Wrapper = styled.div`
     width: 460px;
+    position: relative;
     text-align: center;
     margin-top: 10px;
     margin-bottom: 2px;
@@ -43,6 +48,13 @@ const Nickname = styled.div`
     padding-top: 5px;
     padding-bottom: 5px;
     
+`;
+
+const CrownImage = styled.img`
+    width: 24px;
+    position: absolute;
+    right: 15px;
+    z-index: 1;
 `;
 
 export default MemberBox;
