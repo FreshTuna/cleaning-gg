@@ -2,8 +2,9 @@ import styled from "styled-components";
 import useMatchContainer from "../hooks/useMatchContainer";
 import MemberBox from "./MemberBox";
 import {useEffect} from "react";
+import useLoading from "../hooks/useLoading";
 
-function MatchContainer({openMemberInfoModal, newMemberList}){
+function MatchContainer({openMemberInfoModal, newMemberList, openRoasterModal}){
 
     const {
         state,
@@ -12,7 +13,11 @@ function MatchContainer({openMemberInfoModal, newMemberList}){
         refreshMemberList,
         addMember,
         onLoad,
-    } = useMatchContainer();
+    } = useMatchContainer({
+        params:{
+            openRoasterModal:openRoasterModal
+        }
+    });
 
     useEffect(() => {
         onLoad();
@@ -21,6 +26,8 @@ function MatchContainer({openMemberInfoModal, newMemberList}){
     useEffect( ()=> {
         refreshMemberList(newMemberList);
     }, [newMemberList])
+
+    const {visible} = useLoading();
 
     return (
         <>
@@ -46,7 +53,13 @@ function MatchContainer({openMemberInfoModal, newMemberList}){
                         <PublishButton onClick={startRandomize}>매칭 시작</PublishButton>
                     </Wrapper>
                     :
-                    <PublishButton onClick={() => startMatching(localStorage.getItem('game_nickname'))}>매치 생성</PublishButton>
+                    <>
+                        {
+                            !visible &&
+                                <PublishButton onClick={() => startMatching(localStorage.getItem('game_nickname'))}>매치 생성</PublishButton>
+                        }
+                    </>
+
 
             }
         </>

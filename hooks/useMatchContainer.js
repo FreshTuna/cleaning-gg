@@ -3,7 +3,7 @@ import {apiClient} from "../common/util";
 import {LOCAL_IP_ADDRESS} from "../common/constants";
 import useLoading from "./useLoading";
 
-export default function useMatchContainer(){
+export default function useMatchContainer({params}){
     const {showLoadingIcon, closeLoadingIcon} = useLoading();
 
     useEffect( () => {
@@ -78,12 +78,12 @@ export default function useMatchContainer(){
         );
 
         if(res.data.MESSAGE == 'ENTRY_EXISTING'){
-            alert("이미 엔트리에 참여되어있습니다!");
             closeLoadingIcon();
+            alert("이미 엔트리에 참여되어있습니다!");
             return;
         } else if(res.data.MESSAGE == 'ENTRY_FULL'){
-            alert("엔트리가 꽉 찼습니다!");
             closeLoadingIcon();
+            alert("엔트리가 꽉 찼습니다!");
             return;
         }
 
@@ -110,7 +110,9 @@ export default function useMatchContainer(){
             })
 
         console.log(res);
-        closeLoadingIcon()
+
+        closeLoadingIcon();
+        params.openRoasterModal(res.data.roaster);
     })
 
     return {

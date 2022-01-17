@@ -35,6 +35,14 @@ export default function useModalSignInContent({params}){
             }
         );
 
+        console.log(res.data.MESSAGE, res.data);
+
+        if(res.data.MESSAGE == "WRONG_GAME_NICKNAME"){
+            closeLoadingIcon();
+            alert("없는 닉네임입니다!");
+            return
+        }
+
         setState(state => ({
             ...state,
             token: res.data.TOKEN

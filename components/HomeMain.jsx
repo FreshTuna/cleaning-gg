@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import MatchContainer from "./MatchContainer";
 
-function HomeMain({openMemberInfoModal,newMemberList}) {
+function HomeMain({openMemberInfoModal,newMemberList,openRoasterModal}) {
 
     return(
         <Wrapper>
-            <MatchContainer openMemberInfoModal={openMemberInfoModal} newMemberList={newMemberList}/>
+            <MatchContainer openMemberInfoModal={openMemberInfoModal} newMemberList={newMemberList} openRoasterModal={openRoasterModal}/>
         </Wrapper>
     )
 }

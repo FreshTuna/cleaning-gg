@@ -9,7 +9,7 @@ function ModalMemberInfoContent({entry, onClose,setNewMemberList}){
         handleLeader,
     } = useModalMemberInfoContent({
         params:{
-            entry:entry,
+            entry:entry,    
             onClose:onClose,
             setNewMemberList:setNewMemberList,
         }
