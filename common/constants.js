@@ -8,8 +8,8 @@ export const TIER_BACKGROUND_COLOR = {
     'PLATINUM' : {key : 'PLATINUM', value: '#57bead'},
     'DIAMOND' : {key : 'DIAMOND', value: '#b8d8e7'},
     'MASTER' : {key : 'MASTER', value: '#ab86d1'},
-    'GRANDMASTER' : {key : 'GRANDMASTER', value: '#722019'},
-    'CHALLENGER': {key : 'CHALLENGER', value: '#8e7b78'},
+    'GRANDMASTER' : {key : 'GRANDMASTER', value: '#4A3933'},
+    'CHALLENGER': {key : 'CHALLENGER', value: '#E6D5B8'},
 }
 
 export const TIER_OPTION = {
