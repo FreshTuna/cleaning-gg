@@ -33,6 +33,11 @@ export default function useModalMemberInfoContent({params}){
                 leader_yn: value,
             });
 
+        if(res.data.MESSAGE == 'ALREADY_TWO_LEADERS'){
+            alert("이미 대장이 두명 있습니다!");
+            return;
+        }
+
         params.setNewMemberList(res.data.entry_list);
         params.onClose();
     })

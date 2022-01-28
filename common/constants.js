@@ -1,5 +1,5 @@
 
-export const LOCAL_IP_ADDRESS = "http://192.168.35.175:8000"
+export const LOCAL_IP_ADDRESS = "http://172.30.1.8:8000"
 
 export const TIER_BACKGROUND_COLOR = {
     'BRONZE' : {key :'BRONZE', value: '#6a3805'},
@@ -8,7 +8,7 @@ export const TIER_BACKGROUND_COLOR = {
     'PLATINUM' : {key : 'PLATINUM', value: '#57bead'},
     'DIAMOND' : {key : 'DIAMOND', value: '#b8d8e7'},
     'MASTER' : {key : 'MASTER', value: '#ab86d1'},
-    'GRANDMASTER' : {key : 'GRANDMASTER', value: '#4A3933'},
+    'GRAND_MASTER' : {key : 'GRAND_MASTER', value: '#4A3933'},
     'CHALLENGER': {key : 'CHALLENGER', value: '#E6D5B8'},
 }
 
@@ -19,7 +19,7 @@ export const TIER_OPTION = {
     'PLATINUM' : {key : 'PLATINUM', value: '플래티넘'},
     'DIAMOND' : {key : 'DIAMOND', value: '다이아몬드'},
     'MASTER' : {key : 'MASTER', value: '마스터'},
-    'GRANDMASTER' : {key : 'GRANDMASTER', value: '그랜드마스터'},
+    'GRAND_MASTER' : {key : 'GRAND_MASTER', value: '그랜드마스터'},
     'CHALLENGER': {key : 'CHALLENGER', value: '챌린저'},
 }
 

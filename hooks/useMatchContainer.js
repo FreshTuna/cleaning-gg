@@ -85,6 +85,10 @@ export default function useMatchContainer({params}){
             closeLoadingIcon();
             alert("엔트리가 꽉 찼습니다!");
             return;
+        } else if(res.data.MESSAGE == 'NO_NICKNAME_EXISTING'){
+            closeLoadingIcon();
+            alert("찾을 수 없는 닉네임입니다! (로그인 재시도 )");
+            return;
         }
 
         const member = {
@@ -109,11 +113,15 @@ export default function useMatchContainer({params}){
                 match_id:state.matchId,
             })
 
-        console.log(res);
+        if(res.data.MESSAGE == 'ENTRY_NOT_FULL'){
+            closeLoadingIcon();
+            alert("아직 10명이 모이지 않았습니다!");
+            return;
+        }
 
         closeLoadingIcon();
         params.openRoasterModal(res.data.roaster);
-    })
+    });
 
     return {
         state,

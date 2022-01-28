@@ -7,18 +7,29 @@ function ModalRoasterContent({roaster}) {
             <FlexDiv>
                 <>BETA</>
                 {
-                    roaster.map( (o,i) => {
+                    roaster.red_team.map( (o,i) => {
                         return <>
-                            {
-                                i % 2 == 1 ?
                                     <RedTeam>
+                                        {
+                                            o.leader_yn &&
+                                            <CrownImage src={"https://cleanhome-dev.s3.ap-northeast-2.amazonaws.com/mbti/crown_icon.svg"} />
+                                        }
                                         <NickName>{o.game_nickname}</NickName>
                                     </RedTeam>
-                                    :
-                                    <BlueTeam>
-                                        <NickName>{o.game_nickname}</NickName>
-                                    </BlueTeam>
-                            }
+                        </>
+                    })
+                }
+
+                {
+                    roaster.blue_team.map( (o,i) => {
+                        return <>
+                            <BlueTeam>
+                                {
+                                    o.leader_yn &&
+                                    <CrownImage src={"https://cleanhome-dev.s3.ap-northeast-2.amazonaws.com/mbti/crown_icon.svg"} />
+                                }
+                                <NickName>{o.game_nickname}</NickName>
+                            </BlueTeam>
                         </>
                     })
                 }
@@ -44,13 +55,17 @@ const FlexDiv = styled.div`
 `;
 
 const RedTeam = styled.div`
-    background: #2d4263;
+    background: #c84b31;
+    position:relative;
+    align-items: center;
     width: 250px;
     border-radius: 7px;
 `;
 
 const BlueTeam = styled.div`
-    background: #c84b31;
+    background: #2d4263;
+    position:relative;
+    align-items: center;
     width: 250px;
     border-radius: 7px;
 `;
@@ -60,6 +75,13 @@ const NickName = styled.div`
     text-align: center;
     padding-top: 6px;
     padding-bottom: 6px;
+`;
+
+const CrownImage = styled.img`
+    width: 32px;
+    position: absolute;
+    right: 10px;
+    z-index: 1;
 `;
 
 export default ModalRoasterContent;

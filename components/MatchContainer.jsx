@@ -46,9 +46,13 @@ function MatchContainer({openMemberInfoModal, newMemberList, openRoasterModal}){
                                         return <MemberBox member={o} key={o.member_id} onClick={openMemberInfoModal} />
                                     })
                             }
-                            <PlusBox onClick={() => addMember(localStorage.getItem('game_nickname'))}>
-                                <PlusImage src={"https://cleanhome-dev.s3.ap-northeast-2.amazonaws.com/commerce_display/ic_PlusSmall_B85_S16_V0.1.svg"} />
-                            </PlusBox>
+                            {
+                                state.memberList.length < 10 &&
+                                <PlusBox onClick={() => addMember(localStorage.getItem('game_nickname'))}>
+                                    <PlusImage src={"https://cleanhome-dev.s3.ap-northeast-2.amazonaws.com/commerce_display/ic_PlusSmall_B85_S16_V0.1.svg"} />
+                                </PlusBox>
+
+                            }
                         </MatchBox>
                         <PublishButton onClick={startRandomize}>매칭 시작</PublishButton>
                     </Wrapper>
@@ -83,9 +87,9 @@ const PublishButton = styled.div`
     padding: 12px 15px 12px 15px;
     font-size: 24px;
     font-color: rgba(0,0,0,0.6);
-    background: #00BED6;
+    background: #ffd66c;
     box-sizing: border-box;
-    box-shadow: 0px 4px 4px rgba(111, 134, 255, 0.4);
+    box-shadow: rgb(0 0 0 / 20%) 7px 7px 30px;
     border-radius: 17px;
     color: white;
 `;
@@ -93,6 +97,7 @@ const PublishButton = styled.div`
 const MatchBox = styled.div`
     width: 500px;
     height: 60vh;
+    min-height: 600px;
     border-radius: 7px;
     align-items:center;
     display: inline-flex;
