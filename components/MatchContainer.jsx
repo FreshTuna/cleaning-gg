@@ -3,6 +3,8 @@ import useMatchContainer from "../hooks/useMatchContainer";
 import MemberBox from "./MemberBox";
 import {useEffect} from "react";
 import useLoading from "../hooks/useLoading";
+import {MATCH_STATUS} from "../common/constants";
+import MatchPlaying from "./MatchPlaying";
 
 function MatchContainer({openMemberInfoModal, newMemberList, openRoasterModal}){
 
@@ -32,7 +34,7 @@ function MatchContainer({openMemberInfoModal, newMemberList, openRoasterModal}){
     return (
         <>
             {
-                state.isMatching?
+                state.matchStatus == MATCH_STATUS.MATCHING.key &&
                     <Wrapper>
                         <MatchBox>
                             <HeaderBox>
@@ -56,15 +58,19 @@ function MatchContainer({openMemberInfoModal, newMemberList, openRoasterModal}){
                         </MatchBox>
                         <PublishButton onClick={startRandomize}>매칭 시작</PublishButton>
                     </Wrapper>
-                    :
-                    <>
-                        {
-                            !visible &&
-                                <PublishButton onClick={() => startMatching(localStorage.getItem('game_nickname'))}>매치 생성</PublishButton>
-                        }
-                    </>
-
-
+            }
+            {
+                state.matchStatus == MATCH_STATUS.PLAYING.key &&
+                    <MatchPlaying memberList={state.memberList} />
+            }
+            {
+                state.matchStatus == "" &&
+                <>
+                    {
+                        !visible &&
+                        <PublishButton onClick={() => startMatching(localStorage.getItem('game_nickname'))}>매치 생성</PublishButton>
+                    }
+                </>
             }
         </>
     )

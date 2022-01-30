@@ -11,7 +11,7 @@ export default function useMatchContainer({params}){
     }, []);
 
     const [state, setState] = useState({
-        isMatching: false,
+        matchStatus:"",
         styleOpacity: 1,
         matchId:0,
         memberList: [],
@@ -28,7 +28,7 @@ export default function useMatchContainer({params}){
             setState( (state) => ({
                 ...state,
                 matchId: res.data.match.match_id,
-                isMatching: true,
+                matchStatus: res.data.match.status,
                 memberList: res.data.entry_list,
             }));
             closeLoadingIcon();
@@ -63,7 +63,7 @@ export default function useMatchContainer({params}){
 
         setState(state => ({
             ...state,
-            isMatching: true,
+            matchStatus: "MATCHING",
         }));
         closeLoadingIcon()
     }, []);
@@ -110,12 +110,17 @@ export default function useMatchContainer({params}){
         showLoadingIcon();
         const res = await apiClient.post(`${LOCAL_IP_ADDRESS}/matches/randomize`,
             {
+                game_nickname: localStorage.getItem('game_nickname'),
                 match_id:state.matchId,
             })
 
         if(res.data.MESSAGE == 'ENTRY_NOT_FULL'){
             closeLoadingIcon();
             alert("아직 10명이 모이지 않았습니다!");
+            return;
+        } else if(res.data.MESSAGE == 'NOT_ALLOWED'){
+            closeLoadingIcon();
+            alert(`리더 또는 매치 생성자만 매치를 시작할 수 있습니다!\n매치 생성자 : ${res.data.MATCH_OWNER}`);
             return;
         }
 
